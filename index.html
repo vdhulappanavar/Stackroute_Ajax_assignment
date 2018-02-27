@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="xmlAjax.js"></script>
+  <style>
+    body{
+      padding : 50px
+    }
+    .paramButton{
+      padding : 10px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body onload="init()">
+  <header>
+
+  </header>
+  <main class="container text-center">
+    <from role="form">
+      <div class="form-group">
+          <select id="selectValueForInput" class="btn btn-primary paramButton">
+              <option value="volvo">Movie Name</option>
+              <option value="saab">Actor Name</option>
+              <option value="mercedes">TV shows</option>
+          </select>
+        <input type="text" name="searchInput" id="searchInput"/>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-default" onclick="showResults()">Get Results</button>
+      </div>
+    </from>
+    <section id="searchResultsDiv">
+    </section>
+    <section>
+      <h1>Browse The Upcoming Movie List </h1>
+      <div id="upcomingMovieResult">
+
+      </div>
+    </section>
+  </main>
+  
+</body>
+</html>
