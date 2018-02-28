@@ -38,6 +38,41 @@ function foo2(id){
   
 }
 
+function showPopularMovieData(data){
+  let divForUpcomingMovie = document.getElementById("popularMovieResult");
+  console.log(data)
+  if(data){    
+    results = (data['results'])
+    if(results){
+      /*for(let i in results){
+        //result = JSON.parse(results[i])
+        console.log(typeof(results[i]))
+        console.log(results[i])
+        console.log(results[i].title)
+        if(i%3 == 0){
+          divForUpcomingMovie.innerHTML+='<section class="row">'
+        }
+        divForUpcomingMovie.innerHTML += '<article class="col-md-4 text-center">'+'<img class="col-md-2 hidden-sm" src="https://image.tmdb.org/t/p/w500/'+results[i].poster_path+'"/><p class="col-md-2 col-sm-4">'+results[i].title+"</p></article>";
+        if(i%3 == 0){
+          divForUpcomingMovie.innerHTML+='</section>'
+        }
+      }*/
+
+      for(let i=0; i<results.length; i+=3){
+        divForUpcomingMovie.innerHTML += createRow(results , i)
+      }
+      
+    }
+    else{
+      divForUpcomingMovie.innerHTML = "Sorry No New Movies to show"
+    }
+  }
+  else{
+    divForUpcomingMovie .innerHTML = "Sorry Couldnt Fetch Data from Server"
+    
+  }
+}
+
 function init(){
   collection = [394117 , 353616]
   
@@ -45,6 +80,7 @@ function init(){
   apiKey = '4a9f640e502709dc6bcd23286de1426e';
   console.log("in init");
   let xhttp = new XMLHttpRequest();
+  let xhttp1 = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
          // Typical action to be performed when the document is ready:
@@ -53,7 +89,17 @@ function init(){
         showUpcomingMovieData(JSON.parse(xhttp.responseText));
       }
   };
+  xhttp1.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+         // Typical action to be performed when the document is ready:
+        //document.getElementById("demo").innerHTML = xhttp.responseText;
+        //console.log(xhttp.responseText)
+        showPopularMovieData(JSON.parse(xhttp1.responseText));
+      }
+  };
   xhttp.open("GET", `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&append_to_response=external_ids`, true);
+  xhttp1.open("GET",`http://api.themoviedb.org/3/discover/movie?%20%E2%86%B5%20sort_by=popularity.desc?&api_key=4a9f640e502709dc6bcd23286de1426e`,true)
+  xhttp1.send()
   xhttp.send(); 
 }
 
