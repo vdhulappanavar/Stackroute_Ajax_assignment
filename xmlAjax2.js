@@ -7,9 +7,9 @@ function getlistele(data){
   `
 }
 
-
-function loadcollection(_collections){
-  let collectionList = document.getElementById("collectionList");
+collection = [394117 , 353616]
+function loadcollection(_collections , divName){
+  let collectionList = document.getElementById(divName);
   for(i in _collections){
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET" ,`https://api.themoviedb.org/3/movie/${_collections[i]}?api_key=4a9f640e502709dc6bcd23286de1426e&language=en-US` , true)
@@ -72,15 +72,28 @@ function showPopularMovieData(data){
     
   }
 }
+function toggleCarret(ele){
+  eleClass = ele.className;
+  //console.log(eleId)
+  console.log(eleClass)
+  console.log(eleClass=="glyphicon glyphicon-plus")
+  if(eleClass=="glyphicon glyphicon-plus"){
+      ele.className = "glyphicon glyphicon-minus"
+  }
+  if(eleClass=="glyphicon glyphicon-minus"){
+    ele.className = "glyphicon glyphicon-plus"
+}
+}
 
 function init(){
   collection = [394117 , 353616]
-  
-  loadcollection(collection)
+  let genresMap = {}
+  loadcollection(collection , "collectionList")
   apiKey = '4a9f640e502709dc6bcd23286de1426e';
   console.log("in init");
   let xhttp = new XMLHttpRequest();
   let xhttp1 = new XMLHttpRequest();
+  let xhttp2 = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
          // Typical action to be performed when the document is ready:
@@ -89,6 +102,7 @@ function init(){
         showUpcomingMovieData(JSON.parse(xhttp.responseText));
       }
   };
+  
   xhttp1.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
          // Typical action to be performed when the document is ready:
@@ -97,10 +111,52 @@ function init(){
         showPopularMovieData(JSON.parse(xhttp1.responseText));
       }
   };
+  function getGenres(genres){
+    if(genres.name == "Action" || genres.name == "Comedy" || genres.name == "Horror" || genres.name == "Music"){
+      genresMap[genres.id] = genres.name
+      xhttp3 = new XMLHttpRequest()
+      xhttp3.open("GET" , `https://api.themoviedb.org/3/genre/${genres.id}/movies?api_key=4a9f640e502709dc6bcd23286de1426e&language=en-US&include_adult=false&sort_by=created_at.asc`)
+      xhttp3.send()
+      xhttp3.onreadystatechange = function(){console.log(genres)
+        if(xhttp3.readyState === 4 && xhttp3.status == 200){
+          //console.log(xhttp3.responseText)
+          let _data = JSON.parse(xhttp3.responseText)
+          //let divGenres = document.getElementById(_data.name)
+          console.log(_data)
+          //_data = _data["results"]
+          console.log(_data.id)
+          console.log(genresMap)
+          console.log(genresMap[_data.id])
+          let divGenres = document.getElementById(genresMap[_data.id])
+          _data = _data["results"]
+          console.log(_data)
+          console.log()
+          //let divGenres = document.getElementById(genres[i].name)
+          for(i=0; i<_data.length;i+=3){
+            divGenres.innerHTML += createRow(_data , i)
+          }
+        }
+      }
+    }}
+  xhttp2.onreadystatechange = function(){
+    
+    if(this.readyState==4 && this.status == 200){
+      genres = JSON.parse(xhttp2.responseText)
+      console.log("in genres")
+      console.log(genres['genres'])
+      genres = genres['genres']
+      for(i in genres){console.log("genres loop : " + i)
+      getGenres(genres[i])
+        
+      }
+    }
+  }
   xhttp.open("GET", `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&append_to_response=external_ids`, true);
   xhttp1.open("GET",`http://api.themoviedb.org/3/discover/movie?%20%E2%86%B5%20sort_by=popularity.desc?&api_key=4a9f640e502709dc6bcd23286de1426e`,true)
+  xhttp2.open("GET" , "https://api.themoviedb.org/3/genre/movie/list?api_key=4a9f640e502709dc6bcd23286de1426e&language=en-US" , true)
   xhttp1.send()
   xhttp.send(); 
+  xhttp2.send()
 }
 
 function foo1(mdata){
@@ -129,7 +185,12 @@ function foo(data){
   }
 }
 
+function showCollectionData(){
+  console.log("sjow collection")
+  console.log(collection)
+  loadcollection(collection  , "collectionModalBody" )
 
+}
 
 function createRow(data , pos){
   console.log("createRow")

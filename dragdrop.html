@@ -26,7 +26,10 @@ function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     ev.dataTransfer.dropEffect = "copy"; 
-    ev.target.appendChild(document.getElementById(data));
+    let foo = document.getElementById(data).outerHTML;
+    let newEle = document.createElement('div')
+    newEle.innerHTML = foo;
+    ev.target.appendChild(newEle);
 }
 </script>
 </head>
