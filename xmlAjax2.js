@@ -144,10 +144,10 @@ function createRow(data , pos){
     //result = JSON.parse(data[i])
     if(data[i]){ console.log("inside if")
     console.log(data[i].poster_path)
-      row+=`<article class="col-md-3">
+      row+=`<article class="col-sm-4">
                <div class="panel panel-default panel-front">
                   <div class=" panel-heading">
-                    <h4 class="panel-title"><img class="col-md-3" src="https://image.tmdb.org/t/p/w500/${data[i].poster_path}"/></h4>
+                    <h4 class="panel-title"><img src="https://image.tmdb.org/t/p/w500/${data[i].poster_path}"/></h4>
                   </div>
                   <div class="panel-body">
                     <a onclick="foo(this.id)" id="${data[i].id}" data-toggle="modal" data-target="#myModal"><h3 class="text-primary">${data[i].title}</h3></a>
