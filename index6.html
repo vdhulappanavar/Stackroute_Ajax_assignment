@@ -1,0 +1,198 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="xmlAjax2.js"></script>
+  <style>
+      .panel-front { /* Only for this preview */
+    margin-bottom:20px;
+    margin-top:20px;
+}
+
+.panel-front .panel-heading .panel-title img {
+	border-radius:3px 3px 0px 0px;
+	width:100%;
+}
+
+.panel-front .panel-heading {
+	padding: 0px;	
+}
+
+.panel-front .panel-heading h4 {
+	line-height: 0;
+}
+
+.panel-front .panel-body h4 {
+	font-weight: bold;
+	margin-top: 5px;
+	margin-bottom: 15px;
+}
+
+.text-right {
+    margin-top: 10px;
+}
+body{
+  padding-top:70px;
+}
+.searchBtn{
+  margin : 10px;
+}
+.search-icon{
+  margin: 10px;
+  font-size: 20px;
+}
+  </style>
+</head>
+<body onload="init()">
+  <header>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>  
+
+          </button>
+          <button class="visible-xs"><span class="glyphicon glyphicon-search  search-icon" data-toggle="modal" data-target="#searchModal" style="color:white"></span></button>
+          <a class="navbar-brand" href="#">Movie Cruiser</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#upcomingMovieResultHead">Upcoming Movies</a></li>
+            <li><a href="#popularMovieResultHead">Popular Movies</a></li>
+            <li><a href="#genresMovieResultHead">Genres</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <button class="btn btn-success searchBtn" data-toggle="modal" data-target="#searchModal">Search Modal</button>
+            <button class="btn btn-warning searchBtn" data-toggle="modal" data-target="#myCollectionModal"  onclick="showCollectionData()">My Collections</button>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+      <h1 class="text-primary" data-toggle="collapse" href="#upcomingMovieResult" id="upcomingMovieResultHead"><span class="glyphicon glyphicon-minus" id="upcomingMovieResultHeadIcon" onclick="toggleCarret(this)"></span>Browse The Latest Movie List  </h1>
+      <div class=" panel-collapse collapse in" id="upcomingMovieResult">
+
+          
+      </div>
+      <h1 class="text-primary" data-toggle="collapse" id="popularMovieResultHead" href="#popularMovieResult"><span class="glyphicon glyphicon-minus" id="upcomingMovieResultHeadIcon" onclick="toggleCarret(this)"></span>Browse The Popular Movie List </h1>
+      <div class="panel-collapse collapse in" id="popularMovieResult">
+
+          
+      </div>
+      <h1 class="text-primary" data-toggle="collapse" href="#genresMovieResult" id="genresMovieResultHead" ><span class="glyphicon glyphicon-minus" id="upcomingMovieResultHeadIcon" onclick="toggleCarret(this)"></span>Browse By Genres </h1>
+      <div id="genresMovieResult">
+      <ul class="nav nav-tabs" >
+          <li class="active"><a data-toggle="tab" href="#Action">Action</a></li>
+          <li><a data-toggle="tab" href="#Comedy">Comedy</a></li>
+          <li><a data-toggle="tab" href="#Horror">Horror</a></li>
+          <li><a data-toggle="tab" href="#Music">Music</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="Action" class="tab-pane fade in active">
+              
+            </div>
+            <div id="Comedy" class="tab-pane fade  ">
+              
+            </div>
+            <div id="Horror" class="tab-pane fade  ">
+              
+            </div>
+            <div id="Music" class="tab-pane fade  ">
+              
+            </div>
+        </div>     
+        </div>
+      
+      </div>
+      <div class="col-md-2">
+          <h1 class="text-center">My Collection</h1>
+          <div class="list-group" id="collectionList">
+              
+          </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                Movie Data <span id="movieData"></span>
+            </div>
+            <div class="modal-body" id="movieData1">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div><!-- Mymodal for shwoing movie details ends here-->
+    <div class="modal fade" id="myCollectionModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+              My collections
+          </div>
+          <div class="modal-body" id="collectionModalBody">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+  </div><!-- Mymodal for shwoing movie details ends here-->
+  </div>
+  <div class="modal fade" id="searchModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content" style="padding-top:10">
+          <div class="modal-header text-center" >
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <from role="form">
+                  <div class="form-group">
+                      <select id="selectValueForInput" class="btn btn-primary paramButton">
+                          <option value="movie">Movie Name</option>
+                          <option value="person">Actor Name</option>
+                          <option value="tvshow">TV shows</option>
+                      </select>
+                    <input type="text" name="searchInput" id="searchInput"/>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-warning" onclick="showResults()">Get Results</button>
+                  </div>
+                </from>
+          </div>
+          <div class="modal-body">
+              <div id="searchResultsDiv">
+
+              </div>
+              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      </div>
+  </div><!-- Serch Modal Ends here -->
+  </main>
+</body> 
+</html>
