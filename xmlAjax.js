@@ -14,6 +14,22 @@ function init(){
   xhttp.send(); 
 }
 
+function createRow(data){
+  let row = "";
+  row += `<section class="row">`
+  for(let i=0; i<3; i++){
+    row+=`<article class="col-md-4"
+              <div class="col-md-2">
+                <img src=https://image.tmdb.org/t/p/w500/${data[i].poster_path}/>
+              </div>
+              <div class="col-md-2">
+                results[i].titl
+              </div>    
+          </article>
+    `
+  }
+  row+="<section>"
+}
 function showUpcomingMovieData(data){
   //console.log("inshowUpcomingMovieData" )
   //baseHTMLElement = <article class="col-md-3"><h3></h3></article>
@@ -30,7 +46,7 @@ function showUpcomingMovieData(data){
         if(i%3 == 0){
           divForUpcomingMovie.innerHTML+='<section class="row">'
         }
-        divForUpcomingMovie.innerHTML += '<article class="col-md-4">'+'<img class="col-md-2 hidden-sm" src="https://image.tmdb.org/t/p/w500/'+results[i].poster_path+'"/><p class="col-md-2 col-sm-4">'+results[i].title+"</p></article>";
+        divForUpcomingMovie.innerHTML += '<article class="col-md-4 text-center">'+'<img class="col-md-2 hidden-sm" src="https://image.tmdb.org/t/p/w500/'+results[i].poster_path+'"/><p class="col-md-2 col-sm-4">'+results[i].title+"</p></article>";
         if(i%3 == 0){
           divForUpcomingMovie.innerHTML+='</section>'
         }
