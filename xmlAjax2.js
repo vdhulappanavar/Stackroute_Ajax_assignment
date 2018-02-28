@@ -101,7 +101,7 @@ function createRow(data , pos){
       row+=`<article class="col-md-3">
                <div class="panel panel-default panel-front">
                   <div class=" panel-heading">
-                    <img class="img-responsive col-md-3" src="https://image.tmdb.org/t/p/w500/${data[i].poster_path}"/>
+                    <h4 class="panel-title"><img class="col-md-3" src="https://image.tmdb.org/t/p/w500/${data[i].poster_path}"/></h4>
                   </div>
                   <div class="panel-body">
                     <a onclick="foo(this.id)" id="${data[i].id}" data-toggle="modal" data-target="#myModal"><h3 class="text-primary">${data[i].title}</h3></a>
@@ -125,10 +125,10 @@ function createRow1(data , pos){
   row += `<section class="row">`
   
     console.log(data[pos].poster_path)
-      row+=`<article">
+      row+=`<article class="col-md-3">
                <div class="panel panel-default panel-front">
                   <div class=" panel-heading">
-                    <img class="img-responsive img-thumbnail" width="400" height="400"  src="https://image.tmdb.org/t/p/w500/${data[pos].poster_path}"/>
+                    <h4 class="panel-title"><img src="https://image.tmdb.org/t/p/w500/${data[pos].poster_path}"/></h4>
                   </div>
                   <div class="panel-body">
                     <a onclick="foo(this.id)" id="${data[pos].id}" data-toggle="modal" data-target="#myModal"><h3 class="text-primary">${data[pos].title}</h3></a>
@@ -184,6 +184,7 @@ function showUpcomingMovieData(data){
 function showResults(){
   console.log("keyed UP")
   let searchBarInput = document.getElementById("searchInput").value;
+  document.getElementById("searchResultsDiv").innerHTML="";
   let splitData = searchBarInput.split(" ");
   if(splitData.length>1){
     searchBarInput = splitData.join("%20")
@@ -229,8 +230,13 @@ function printSerchResults(data){
         resultDiv.innerHTML += "</div>"
   }*/
 
-  for(let i=0; i<len; i+=1){console.log(i)
+  /*for(let i=0; i<len; i+=1){console.log(i)
     resultDiv.innerHTML += createRow1(results , i )
+  }*/
+
+
+  for(let i=0; i<len; i+=3){
+    resultDiv.innerHTML += createRow(results , i )
   }
 }
 

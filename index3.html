@@ -41,6 +41,49 @@
   </style>
 </head>
 <body>
+    <div class="modal fade" id="searchModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="padding-top:10">
+        <div class="modal-heading text-center" >
+            <from role="form">
+                <div class="form-group">
+                    <select id="selectValueForInput" class="btn btn-primary paramButton">
+                        <option value="movie">Movie Name</option>
+                        <option value="person">Actor Name</option>
+                        <option value="tvshow">TV shows</option>
+                    </select>
+                  <input type="text" name="searchInput" id="searchInput"/>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-default" onclick="showResults()">Get Results</button>
+                </div>
+              </from>
+        </div>
+        <div class="modal-body" id="movieData1">
+            <div class="panel panel-default panel-front">		
+            
+                <div class="panel-heading">
+                
+                  <h4 class="panel-title"><a HREF="#"><img src="https://i.imgur.com/UuosGKL.jpg"></a></h4>
+                  
+                </div>
+                
+                <div class="panel-body">
+                
+                  <h4>Pulp Fiction</h4>
+                
+                  Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year.
+                  
+                <div class="text-right">
+                  <a href="#" data-toggle="modal" data-target="#searchModal"  class="btn btn-info btn-sm" role="button">Big Kahuna</a>
+                </div>
+                  
+                </div>
+              </div>	
+        </div>
+      </div>
+    </div>
+</div><!-- Serch Modal Ends here -->
   <div class="container">
     <div class="row">
       <div class="col-md-9">
@@ -61,7 +104,7 @@
                     Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year.
                     
                   <div class="text-right">
-                    <a href="#" class="btn btn-info btn-sm" role="button">Big Kahuna</a>
+                    <a href="#" data-toggle="modal" data-target="#searchModal"  class="btn btn-info btn-sm" role="button">Big Kahuna</a>
                   </div>
                     
                   </div>

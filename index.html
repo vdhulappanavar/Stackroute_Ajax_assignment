@@ -40,171 +40,61 @@
 }
   </style>
 </head>
-<body>
+<body onload="init()">
   <div class="container">
     <div class="row">
-      <div class="col-md-9">
-        <div class="row">
-          <div class="col-sm-4">
-              <div class="panel panel-default panel-front">		
-            
-                  <div class="panel-heading">
-                  
-                    <h4 class="panel-title"><a HREF="#"><img src="https://i.imgur.com/UuosGKL.jpg"></a></h4>
-                    
-                  </div>
-                  
-                  <div class="panel-body">
-                  
-                    <h4>Pulp Fiction</h4>
-                  
-                    Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year.
-                    
-                  <div class="text-right">
-                    <a href="#" class="btn btn-info btn-sm" role="button">Big Kahuna</a>
-                  </div>
-                    
-                  </div>
-                </div>		
-          </div>
-          
-          <div class="col-sm-4">		
-          
-            <div class="panel panel-default panel-front">		
-            
-              <div class="panel-heading">
-              
-                <h4 class="panel-title"><a HREF="#"><img src="https://i.imgur.com/UuosGKL.jpg"></a></h4>
-                
-              </div>
-              
-              <div class="panel-body">
-              
-                <h4>Pulp Fiction</h4>
-              
-                Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year.
-                
-              <div class="text-right">
-                <a href="#" class="btn btn-info btn-sm" role="button">Big Kahuna</a>
-              </div>
-                
-              </div>
-            </div>		
-          
-          </div>
-          
-          <div class="col-sm-4"> 
-              <div class="panel panel-default panel-front">		
-            
-                  <div class="panel-heading">
-                  
-                    <h4 class="panel-title"><a HREF="#"><img src="https://i.imgur.com/UuosGKL.jpg"></a></h4>
-                    
-                  </div>
-                  
-                  <div class="panel-body">
-                  
-                    <h4>Pulp Fiction</h4>
-                  
-                    Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year.
-                    
-                  <div class="text-right">
-                    <a href="#" class="btn btn-info btn-sm" role="button">Big Kahuna</a>
-                  </div>
-                    
-                  </div>
-                </div>		
-          </div>
-          
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="panel panel-default panel-front">		
-              
-                    <div class="panel-heading">
-                    
-                      <h4 class="panel-title"><a HREF="#"><img src="https://i.imgur.com/UuosGKL.jpg"></a></h4>
-                      
-                    </div>
-                    
-                    <div class="panel-body">
-                    
-                      <h4>Pulp Fiction</h4>
-                    
-                      Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year.
-                      
-                    <div class="text-right">
-                      <a href="#" class="btn btn-info btn-sm" role="button">Big Kahuna</a>
-                    </div>
-                      
-                    </div>
-                  </div>		
-            </div>
-            
-            <div class="col-sm-4">		
-            
-              <div class="panel panel-default panel-front">		
-              
-                <div class="panel-heading">
-                
-                  <h4 class="panel-title"><a HREF="#"><img src="https://i.imgur.com/UuosGKL.jpg"></a></h4>
-                  
-                </div>
-                
-                <div class="panel-body">
-                
-                  <h4>Pulp Fiction</h4>
-                
-                  Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year.
-                  
-                <div class="text-right">
-                  <a href="#" class="btn btn-info btn-sm" role="button">Big Kahuna</a>
-                </div>
-                  
-                </div>
-              </div>		
-            
-            </div>
-            
-            <div class="col-sm-4"> 
-                <div class="panel panel-default panel-front">		
-              
-                    <div class="panel-heading">
-                    
-                      <h4 class="panel-title"><a HREF="#"><img src="https://i.imgur.com/UuosGKL.jpg"></a></h4>
-                      
-                    </div>
-                    
-                    <div class="panel-body">
-                    
-                      <h4>Pulp Fiction</h4>
-                    
-                      Yeah, I like animals better than people sometimes... Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year.
-                      
-                    <div class="text-right">
-                      <a href="#" class="btn btn-info btn-sm" role="button">Big Kahuna</a>
-                    </div>
-                      
-                    </div>
-                  </div>		
-            </div>
-            
-          </div>
+      <h1 class="text-primary">Browse The Latest Movie List <button class="btn btn-success" data-toggle="modal" data-target="#searchModal">Search Modal</button> </h1>
+      <div class="col-md-10" id="upcomingMovieResult">
+
           
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
+          <h1 class="text-center">My Collection</h1>
           <div class="list-group" id="collectionList">
-              <a href="#" class="list-group-item">
-                  <h4 class="list-group-item-heading">hey</h4>
-                  <p class="list-group-item-text">WhatEver</p>
-              </a>
-              <a href="#" class="list-group-item">
-                  <h4 class="list-group-item-heading">hey</h4>
-                  <p class="list-group-item-text">WhatEver</p>
-              </a>
+              
           </div>
       </div>
     </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-heading">
+                HEY <span id="movieData"></span>
+            </div>
+            <div class="modal-body" id="movieData1">
+
+            </div>
+          </div>
+        </div>
+    </div><!-- Mymodal for shwoing movie details ends here-->
   </div>
+  <div class="modal fade" id="searchModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content" style="padding-top:10">
+          <div class="modal-heading text-center" >
+              <from role="form">
+                  <div class="form-group">
+                      <select id="selectValueForInput" class="btn btn-primary paramButton">
+                          <option value="movie">Movie Name</option>
+                          <option value="person">Actor Name</option>
+                          <option value="tvshow">TV shows</option>
+                      </select>
+                    <input type="text" name="searchInput" id="searchInput"/>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-default" onclick="showResults()">Get Results</button>
+                  </div>
+                </from>
+          </div>
+          <div class="modal-body">
+              <div id="searchResultsDiv">
+
+              </div>
+          </div>
+        </div>
+      </div>
+  </div><!-- Serch Modal Ends here -->
 </body> 
 </html>
