@@ -1,13 +1,20 @@
+function drag1(event){
+  event.dataTransfer.setData("collectionId", event.target.id);
+}
+
 function getlistele(data){
+
   return `
-  <a href="#" class="list-group-item">
-      <h4 class="list-group-item-heading">${data.title}</h4>
+  <a href="#" class="list-group-item" draggable="true" ondragstart="drag1(event)>
+      <h4 id="${collection.indexOf(data.id)}" class="list-group-item-heading">${data.title}</h4>
       <p class="list-group-item-text">WhatEver</p>
   </a>
   `
 }
-
-collection = [394117 , 353616]
+collection =[394117,353616 ]
+__collection = { "Top 10" :  [394117],
+"Time Pass" : [353616]
+}
 function loadcollection(_collections , divName){
   let collectionList = document.getElementById(divName);
   for(i in _collections){
@@ -86,7 +93,7 @@ function toggleCarret(ele){
 }
 
 function init(){
-  collection = [394117 , 353616]
+  //collection = [394117 , 353616]
   let genresMap = {}
   loadcollection(collection , "collectionList")
   apiKey = '4a9f640e502709dc6bcd23286de1426e';

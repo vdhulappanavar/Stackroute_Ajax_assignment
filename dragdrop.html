@@ -25,7 +25,7 @@ function drop(ev) {
         dt.dropEffect = "copy";*/
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    ev.dataTransfer.dropEffect = "copy"; 
+    //ev.dataTransfer.dropEffect = "copy"; 
     let foo = document.getElementById(data).outerHTML;
     let newEle = document.createElement('div')
     newEle.innerHTML = foo;
