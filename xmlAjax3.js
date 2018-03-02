@@ -32,7 +32,9 @@ function loadcollection(_collections , divName){
 }
 function foo2(id){
   console.log(id)
-  //collection.push(id)
+  collection.push(id)
+  console.log("in foo2 collection")
+  console.log(collection)
   let xhttp = new XMLHttpRequest();
   xhttp.open("GET", `https://api.themoviedb.org/3/movie/${id}?api_key=4a9f640e502709dc6bcd23286de1426e&language=en-US` , true)
   xhttp.send()
@@ -211,14 +213,18 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 function drop(ev) {
-  console.log("bigger drag func")
+  console.log("chaging")
+  console.log("bigger drag func!!!!")
   /*var dt =  ev.dataTransfer;
         dt.dropEffect = "copy";*/
     console.log(ev.dataTransfer.getData("dragEventOf"))
     ev.preventDefault();
     if(ev.dataTransfer.getData("dragEventOf") == "movieToCollection"){
+      console.log("in if movie to collection")
     var data = ev.dataTransfer.getData("movieId");
     foo2(data)
+    console.log("after foo2 ")
+    console.log(collection)
     //ev.dataTransfer.dropEffect = "copy"; 
     //let foo = document.getElementById(data).outerHTML;
     //let newEle = document.createElement('div')
@@ -228,9 +234,10 @@ function drop(ev) {
     else{
       console.log(ev.target.id)
       console.log(collection)
-      let toMoveIndex  = ev.dataTransfer.getData("collectionId");
+      let toMoveIndex  = parseInt(ev.dataTransfer.getData("collectionId"));
       let mycurrenIndex = parseInt(ev.target.id);
       let temp = collection[mycurrenIndex]
+      console.log(temp)
       collection[mycurrenIndex] = collection[toMoveIndex]
       collection[toMoveIndex] = temp
       document.getElementById("collectionList").innerHTML = "";
