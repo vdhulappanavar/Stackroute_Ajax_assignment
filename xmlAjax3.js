@@ -1,11 +1,13 @@
 function drag1(event){
   event.dataTransfer.setData("collectionId", event.target.id);
+  console.log("drag1")
+  event.dataTransfer.setData("dragEventOf" , "collectionToCollection")
 }
 
 function getlistele(data){
 
   return `
-  <a href="#" class="list-group-item" draggable="true" ondragstart="drag1(event)>
+  <a href="#" class="list-group-item">
       <h4 id="${collection.indexOf(data.id)}" class="list-group-item-heading">${data.title}</h4>
       <p class="list-group-item-text">WhatEver</p>
   </a>
@@ -203,6 +205,7 @@ function drag(event){
   console.log(event.target)
   console.log(event.target.id)
   event.dataTransfer.setData("movieId", event.target.id);
+  event.dataTransfer.setData("dragEventOf" , "movieToCollection")
 }
 function allowDrop(ev) {
   ev.preventDefault();
@@ -211,7 +214,9 @@ function drop(ev) {
   console.log("bigger drag func")
   /*var dt =  ev.dataTransfer;
         dt.dropEffect = "copy";*/
+    console.log(ev.dataTransfer.getData("dragEventOf"))
     ev.preventDefault();
+    if(ev.dataTransfer.getData("dragEventOf") == "movieToCollection"){
     var data = ev.dataTransfer.getData("movieId");
     foo2(data)
     //ev.dataTransfer.dropEffect = "copy"; 
@@ -219,6 +224,20 @@ function drop(ev) {
     //let newEle = document.createElement('div')
     //newEle.innerHTML = foo;
     //ev.target.appendChild(newEle);
+    }
+    else{
+      console.log(ev.target.id)
+      console.log(collection)
+      let toMoveIndex  = ev.dataTransfer.getData("collectionId");
+      let mycurrenIndex = parseInt(ev.target.id);
+      let temp = collection[mycurrenIndex]
+      collection[mycurrenIndex] = collection[toMoveIndex]
+      collection[toMoveIndex] = temp
+      document.getElementById("collectionList").innerHTML = "";
+      console.log(collection)
+      loadcollection(collection , 'collectionList')
+
+    }
 }
 
 function createRow(data , pos){
